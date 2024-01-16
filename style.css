@@ -1,0 +1,25 @@
+* {
+    background-color: darkgrey;
+}
+
+.title {
+    text-align: center;
+    color: cadetblue;
+}
+
+.grid-div {
+    width: 16px;
+    height: 16px;
+    background-color: white;
+}
+
+
+#canvas {
+    width: 256px;
+    height: 256px;
+    background-color: white;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+}
