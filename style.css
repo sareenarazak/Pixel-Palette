@@ -2,27 +2,32 @@
     background-color: darkgrey;
 }
 
-.title {
+.heading {
     text-align: center;
     color: cadetblue;
 }
 
-.grid-div {
-    width: 16px;
-    height: 16px;
-    background-color: white;
+.main {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-#color-input {
-    text-align: center; /** Is there a diff way */
-    padding: 20px;
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px 30px;
+}
+
+.grid-div {
+    background-color: white;
 }
 
 #canvas {
     width: 256px;
     height: 256px;
     background-color: white;
-    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
 }
+

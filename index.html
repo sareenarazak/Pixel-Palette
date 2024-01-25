@@ -7,16 +7,25 @@
     <title>Etch a Sketch</title>
     <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <div class="title">
-        <h1> Etch A Sketch </h1>
-    </div>
-    <div id="color-input">
-        <input type="color" id="color-picker" value="#0000"/>
-        <label for="color-picker">Choose a color</label>
-    </div>
 
-    <div id="canvas">
+<body>
+    <header class="heading">
+        <h1 class="title">Pixel Fun</h1>
+    </header>
+    <div class="main">
+        <div class="options">
+                <input type="color" id="color-picker" value="#000000"/>
+                <label for="color-picker">Choose a color</label>
+                <button id="rgb-random">Random RGB</button>
+                <button id="eraser">Eraser</button>
+                <button id="clear">Reset canvas</button>
+
+                <div class="pixel-size">16 x 16</div>
+                <input type="range" id="pixel-size" value="16" min="1" max="64">
+                <label for="pixel-size" Pick your pixel size></label>
+        </div>
+
+        <div id="canvas"></div>
     </div>
     <script src="sketch.js"></script>
 </body>
