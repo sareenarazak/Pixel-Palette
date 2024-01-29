@@ -4,7 +4,7 @@
 
 .heading {
     text-align: center;
-    color: cadetblue;
+    color: #AC87C5;
 }
 
 .main {
@@ -19,13 +19,13 @@
     gap: 30px 30px;
 }
 
-.grid-div {
+.pixel-div {
     background-color: white;
 }
 
 #canvas {
-    width: 256px;
-    height: 256px;
+    width: 448px;
+    height: 448px;
     background-color: white;
     display: flex;
     flex-wrap: wrap;

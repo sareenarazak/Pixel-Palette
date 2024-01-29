@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- Device width friendly -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Etch a Sketch</title>
+    <title>Pixel Palette</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -14,9 +14,10 @@
     </header>
     <div class="main">
         <div class="options">
+                <button id="color-normal">Normal mode</button>
                 <input type="color" id="color-picker" value="#000000"/>
-                <label for="color-picker">Choose a color</label>
-                <button id="rgb-random">Random RGB</button>
+                <label for="color-picker">Choose color</label>
+                <button id="color-chaos">Chaos mode</button>
                 <button id="eraser">Eraser</button>
                 <button id="clear">Reset canvas</button>
 
@@ -24,9 +25,8 @@
                 <input type="range" id="pixel-size" value="16" min="1" max="64">
                 <label for="pixel-size" Pick your pixel size></label>
         </div>
-
         <div id="canvas"></div>
     </div>
-    <script src="sketch.js"></script>
+    <script src="pixel.js"></script>
 </body>
 </html>
