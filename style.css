@@ -21,7 +21,8 @@
 
 .pixel-div {
     background-color: white;
-}
+    /* TODO : delete once done with all functionalities */
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.5);}
 
 #canvas {
     width: 448px;

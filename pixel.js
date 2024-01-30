@@ -5,6 +5,7 @@ const colorChaosBtn = document.getElementById("color-chaos");
 const pixelSizeInput = document.getElementById("pixel-size");
 const clearButton = document.getElementById("clear");
 const eraseButton = document.getElementById("eraser");
+const pixelSizeLabel = document.querySelector(".pixel-size");
 
 // Variables
 let pixelSize = Number.parseInt(pixelSizeInput.value, 10);
@@ -23,12 +24,13 @@ colorPicker.addEventListener("input", setColor);
 colorChaosBtn.addEventListener("click", () => changeMode("chaos"));
 pixelSizeInput.addEventListener("input", changePixelSize);
 
-eraseButton.addEventListener("click", () =>changeMode("erase"));
+eraseButton.addEventListener("click", () => changeMode("erase"));
 clearButton.addEventListener("click", clearCanvas);
 
 
 function createPixelArtCanvas(pixelSize) {
     let count = Math.floor(canvas.clientHeight/ pixelSize);
+
     for(let index = 0; index <  count * count ; index++) {
         const pixelDiv = document.createElement("div");
         pixelDiv.style.width = `${pixelSize}px`;
@@ -61,14 +63,20 @@ function setColor(event) {
 function clearCanvas() {
     const pixelDivs = document.querySelectorAll(".pixel-div");
     pixelDivs.forEach(pixel => pixel.style.backgroundColor = "white");
-    changeMode("normal");
+   // changeMode("normal"); --> Rethink this
 }
 
 function changePixelSize(event) {
-    clearCanvas();``
+    deletePixels();
     pixelSize = event.target.value;
+    pixelSizeLabel.innerText = `${pixelSize} x ${pixelSize}`;
+    createPixelArtCanvas(pixelSize);
 }
 
+function deletePixels() {
+    canvas.innerHTML = "";
+    //pixelDivs.forEach(pixel => pixel.re)
+}
 function changeMode(newNode) {
     mode = newNode;
 }
