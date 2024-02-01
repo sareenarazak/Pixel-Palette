@@ -1,10 +1,10 @@
-* {
+body, html {
     background-color: darkgrey;
 }
 
 .heading {
     text-align: center;
-    color: #AC87C5;
+    color: #8219c9;
 }
 
 .main {
@@ -22,7 +22,8 @@
 .pixel-div {
     background-color: white;
     /* TODO : delete once done with all functionalities */
-    box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.5);}
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.5);
+}
 
 #canvas {
     width: 448px;
