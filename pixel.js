@@ -55,22 +55,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // TODO: refactor the 4 methods for mode changes / button clicks 
+    // TODO: refactor the 4 methods for button clicks
     function handleNormalModeButtonClick() {
+        highlightButton(normalModeBtn);
         setMode("normal");
         setColor(colorPicker.value);
     }
 
     function handleColorPickerInputChange(event) {
+        highlightButton(normalModeBtn);
         setMode("normal");
         setColor(event.target.value);
     }
 
     function handleChaosModeButtonClick() {
+        highlightButton(chaosModeBtn);
         setMode("chaos")
     }
 
     function handleEraseButtonClick() {
+        highlightButton(eraseButton);
         setMode("erase");
     }
 
@@ -100,5 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function deletePixels() {
         canvas.innerHTML = "";
+    }
+
+    function highlightButton(selectedButton) {
+        [normalModeBtn, chaosModeBtn, eraseButton].forEach(button => {
+            if (button === selectedButton) {
+                button.classList.add("selected");
+            } else {
+                button.classList.remove("selected");
+            }
+        });
     }
 });
