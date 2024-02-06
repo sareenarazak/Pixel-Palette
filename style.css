@@ -1,5 +1,6 @@
 body, html {
-    background-color: darkgrey;
+    color: rgb(107, 121, 189);
+    background: linear-gradient(90deg, #8197e1, #d79090);
 }
 
 .heading {
@@ -34,6 +35,6 @@ body, html {
     height: 448px;
     background-color: white;
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
 }
 

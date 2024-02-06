@@ -1,3 +1,16 @@
+/**
+ *  TODOs:
+ *  1. refactor the 4 methods for button clicks
+ *  2. Use flexbox to group color picker and the normal mode button
+ *  3. Ask for code review
+ *  4. Set up ESLint (do i need it )
+ *  5. Remove box shadow
+ *  6. Add read me
+ *  7. Do I highlight normal mode on load
+ *  8. remove highlights when reset canvas
+ *
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("canvas");
     const normalModeBtn = document.getElementById("color-normal");
@@ -55,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // TODO: refactor the 4 methods for button clicks
     function handleNormalModeButtonClick() {
         highlightButton(normalModeBtn);
         setMode("normal");
