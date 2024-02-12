@@ -12,6 +12,13 @@
  *
  */
 
+// Data structure for canvas state
+const canvasState = {
+    mode : "normal",
+    pixelSize : 16,
+    pixelData  : {}
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("canvas");
     const normalModeBtn = document.getElementById("color-normal");
@@ -22,12 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const eraseButton = document.getElementById("eraser");
     const pixelSizeLabel = document.getElementById("pixel-size");
 
-    let pixelSize = Number.parseInt(pixelSizeInput.value, 10);
-    let mouseDown = false;
-    let currentColor = "#000000"; // Default color black
-    let mode = "normal";
 
-    createPixelArtCanvas(pixelSize);
+    //let pixelSize = Number.parseInt(pixelSizeInput.value, 10);
+    let mouseDown = false;
+
+    let currentColor = "#000000"; // Default color black
+
+    createPixelArtCanvas(canvasState.pixelSize);
 
     canvas.addEventListener("mouseup", () => { mouseDown = false; });
     canvas.addEventListener("mousedown", () => { mouseDown = true; });
@@ -40,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eraseButton.addEventListener("click", handleEraseButtonClick);
     clearButton.addEventListener("click", clearCanvas);
 
-    pixelSizeInput.addEventListener("input", handlePixelSizeInputChange);
+    pixelSizeInput.addEventListener("input", resetCanvas);
 
     function createPixelArtCanvas(pixelSize) {
         let count = Math.floor(canvas.clientHeight / pixelSize);
@@ -50,22 +58,28 @@ document.addEventListener("DOMContentLoaded", () => {
             pixelDiv.style.width = `${pixelSize}px`;
             pixelDiv.style.height = `${pixelSize}px`;
             pixelDiv.classList.add("pixel-div");
+            pixelDiv.id = index;
 
             canvas.appendChild(pixelDiv);
 
-            pixelDiv.addEventListener("click", drawPixel);
-            pixelDiv.addEventListener("mouseenter", drawPixel);
+            pixelDiv.addEventListener("click", (event) => {
+                drawPixel(event, index);
+            });
+            pixelDiv.addEventListener("mouseenter", (event) => {
+                drawPixel(event, index);
+            });
         }
     }
 
-    function drawPixel(event) {
-        if (mode === "chaos") {
+    function drawPixel(event, index) {
+        if (canvasState.mode === "chaos") {
             setColor("#" + (Math.random() * 0xFFFFFF << 0).toString(16));
-        } else if (mode === "erase") {
+        } else if (canvasState.mode === "erase") {
             setColor("white");
         }
         if (event.type === "click" || (event.type === "mouseenter" && mouseDown)) {
             event.target.style.backgroundColor = currentColor;
+            canvasState.pixelData[index] = currentColor;
         }
     }
 
@@ -91,14 +105,18 @@ document.addEventListener("DOMContentLoaded", () => {
         setMode("erase");
     }
 
-    function handlePixelSizeInputChange(event) {
+    function resetCanvas(event) {
         deletePixels();
+        canvasState.pixelData = {};
         setPixelSize(event.target.value);
-        createPixelArtCanvas(pixelSize);
+        createPixelArtCanvas(canvasState.pixelSize);
     };
 
     function clearCanvas() {
+        // TODO : 1) can we create an id for each pixel  --> canvasState.pixelData
+        // Do we call reserCanvas here instead
         const pixelDivs = document.querySelectorAll(".pixel-div");
+        canvasState.pixelData = {};
         pixelDivs.forEach(pixel => pixel.style.backgroundColor = "white");
     }
 
@@ -107,12 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setMode(newMode) {
-        mode = newMode;
+        canvasState.mode = newMode;
     }
 
     function setPixelSize(size) {
-        pixelSize = size;
-        pixelSizeLabel.innerText = `${pixelSize} x ${pixelSize}`;
+        canvasState.pixelSize = size;
+        pixelSizeLabel.innerText = `${canvasState.pixelSize} x ${canvasState.pixelSize}`;
     }
 
     function deletePixels() {
