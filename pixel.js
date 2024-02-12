@@ -8,6 +8,7 @@
  *  6. Add read me
  *  7. Do I highlight normal mode on load
  *  8. remove highlights when reset canvas
+ *  9. Use grid css instead of div
  *
  */
 
