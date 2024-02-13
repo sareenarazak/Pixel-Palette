@@ -11,24 +11,24 @@
  *  9. Use grid css instead of div
  *
  */
-
+// const LZString = require("lz-string.min");
 // Data structure for canvas state
-const canvasState = {
+let canvasState = {
     mode : "normal",
     pixelSize : 16,
     pixelData  : {}
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {canvasState = getStored();
     const canvas = document.getElementById("canvas");
     const normalModeBtn = document.getElementById("color-normal");
     const colorPicker = document.getElementById("color-picker");
     const chaosModeBtn = document.getElementById("color-chaos");
     const pixelSizeInput = document.getElementById("pixel-size");
-    const clearButton = document.getElementById("clear");
-    const eraseButton = document.getElementById("eraser");
+    const clearBtn = document.getElementById("clear");
+    const eraseBtn = document.getElementById("eraser");
     const pixelSizeLabel = document.getElementById("pixel-size");
-
+    const saveStateBtn = document.getElementById("save-state");
 
     //let pixelSize = Number.parseInt(pixelSizeInput.value, 10);
     let mouseDown = false;
@@ -45,10 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     chaosModeBtn.addEventListener("click", handleChaosModeButtonClick);
 
-    eraseButton.addEventListener("click", handleEraseButtonClick);
-    clearButton.addEventListener("click", clearCanvas);
+    eraseBtn.addEventListener("click", handleEraseButtonClick);
+    clearBtn.addEventListener("click", clearCanvas);
 
     pixelSizeInput.addEventListener("input", resetCanvas);
+
+    saveStateBtn.addEventListener("click", saveState);
 
     function createPixelArtCanvas(pixelSize) {
         let count = Math.floor(canvas.clientHeight / pixelSize);
@@ -101,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function handleEraseButtonClick() {
-        highlightButton(eraseButton);
+        highlightButton(eraseBtn);
         setMode("erase");
     }
 
@@ -138,12 +140,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function highlightButton(selectedButton) {
-        [normalModeBtn, chaosModeBtn, eraseButton].forEach(button => {
+        [normalModeBtn, chaosModeBtn, eraseBtn].forEach(button => {
             if (button === selectedButton) {
                 button.classList.add("selected");
             } else {
                 button.classList.remove("selected");
             }
         });
+    }
+
+
+    // refactor
+    function saveState() {
+        const stateString = JSON.stringify(canvasState);
+        const encoded = LZString.compressToBase64(stateString);
+        console.log(encoded);
+        localStorage.setItem("art1", encoded);
+
+    }
+
+    function getStored() {
+        const decoded = LZString.decompressFromBase64(localStorage.getItem("art1")); // same encoded as above, but read from url
+       console.log(decoded);
+        return decoded;
     }
 });
