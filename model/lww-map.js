@@ -1,4 +1,4 @@
-export class LWWMap {
+export class LwwMap {
     constructor(id, state) {
         this._id = id;
         // Map holds key (string) and value (LWWRegister)
