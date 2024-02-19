@@ -49,11 +49,11 @@ export class LwwMap {
 
         if (register) register.set(value);
 
-        else this.data.set(key, new LWWRegister(this.id, new State(this.id, 1, value));
+        else this.data.set(key, new LWWRegister(this.id, new State(this.id, 1, value)));
     }
 
     get(key) {
-        return this.data.has(key) ? this.get.state(key).value : undefined;
+        return this.data.has(key) ? this.data.get(key).value : undefined;
     }
     delete(key)
     {
