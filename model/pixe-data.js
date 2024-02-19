@@ -1,12 +1,9 @@
-import { LWWMap } from "./lww-map";
+import { LwwMap } from "./lww-map.js";
 export class PixelData {
     constructor(id, pixelData) {
         this._id = id;
-        this._pixelData = new LWWMap(id, pixelData);
+        this._pixelData = new LwwMap(id, pixelData);
     }
-    // get pixelData() {
-    //     return this._pixelData;
-    // }
 
     get value() {
         return this._pixelData.value;
@@ -16,21 +13,22 @@ export class PixelData {
         return this._pixelData.state;
     }
 
+    get pixelData() {
+        return this._pixelData;
+    }
+
     getPixelColor(index) {
+        if(!this.pixelData.has(index)) return undefined;
         const register = this.pixelData.get(index);
         return register ? register : "#FFFFFF";
     }
     setPixelColor(index, color) {
-        this._pixelData.set(index, color);
-    }
-
-    delete(index) {
-        this._pixelData.delete(index);
+        this.pixelData.set(index, color);
     }
 
     merge(pixelData) {
         if (pixelData) {
-            this._pixelData.merge(pixelData);
+            this.pixelData.merge(pixelData);
         }
     }
 
@@ -38,4 +36,3 @@ export class PixelData {
         this.pixelData.delete(index);
     }
 }
-
