@@ -18,6 +18,7 @@ export class PixelData {
     }
 
     getPixelColor(index) {
+        // Should I return #FFFFF instead of undefined ?
         if(!this.pixelData.has(index)) return undefined;
         const register = this.pixelData.get(index);
         return register ? register : "#FFFFFF";
